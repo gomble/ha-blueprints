@@ -43,6 +43,7 @@ condition:
 - condition: template
   value_template: '{{ states(switch_2) != ''unavailable'' }}'
 action:
+- delay: 2
 - service: homeassistant.turn_{{ trigger.to_state.state }}
   data:
     entity_id: '{% if trigger.from_state.entity_id == switch_1 %} {{ switch_2 }} {% elif trigger.from_state.entity_id == switch_2 %} {{ switch_1 }} {% else %} {{ switch_1 }} {% endif %}'
